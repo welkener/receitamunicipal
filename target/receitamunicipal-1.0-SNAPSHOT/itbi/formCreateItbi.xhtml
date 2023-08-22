@@ -1,0 +1,90 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces">
+    
+  
+    <h:form id="formCreateItbi" >
+        <p:fieldset legend="#{xmsg['generalData']}">
+            <x:modalMessages/>
+
+            <div class="container-fluid">
+                 <div class="row">
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="data" value="* #{msg['itbi.data']}:" />
+                         <p:calendar id="data" value="#{itbiMB.entity.data}" 
+                                     showOn="button" pattern="dd/MM/yyyy" styleClass="uix-calendar"  >
+                             <x:mask/>
+                         </p:calendar>
+                     </div>
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="inscricaoCadastral" value="* #{msg['itbi.inscricaoCadastral']}:" />
+                         <p:inputText id="inscricaoCadastral" value="#{itbiMB.entity.inscricaoCadastral}" maxlength="100"  styleClass="form-control"  />
+                     </div>
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="endereco" value="* #{msg['itbi.endereco']}:" />
+                         <p:inputText id="endereco" value="#{itbiMB.entity.endereco}" maxlength="100"  styleClass="form-control"  />
+                     </div>
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="bairro" value="* #{msg['itbi.bairro']}:" />
+                         <p:inputText id="bairro" value="#{itbiMB.entity.bairro}" maxlength="100"  styleClass="form-control"  />
+                     </div>
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="natureza" value="* #{msg['itbi.natureza']}:" />
+                         <p:inputText id="natureza" value="#{itbiMB.entity.natureza}" maxlength="100"  styleClass="form-control"  />
+                     </div>
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="areaTerreno" value="* #{msg['itbi.areaTerreno']}:" />
+                         <x:inputNumber id="areaTerreno" value="#{itbiMB.entity.areaTerreno}" styleClass="form-control"/>
+                     </div>
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="areaEdificada" value="#{msg['itbi.areaEdificada']}:" />
+                         <x:inputNumber id="areaEdificada" value="#{itbiMB.entity.areaEdificada}" styleClass="form-control"/>
+                     </div>
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="valorDeclarado" value="* #{msg['itbi.valorDeclarado']}:" />
+                         <x:inputNumber id="valorDeclarado" value="#{itbiMB.entity.valorDeclarado}" styleClass="form-control"/>
+                     </div>
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="valorTransferencia" value="* #{msg['itbi.valorTransferencia']}:" />
+                         <x:inputNumber id="valorTransferencia" value="#{itbiMB.entity.valorTransferencia}" styleClass="form-control"/>
+                     </div>
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="valorItbi" value="* #{msg['itbi.valorItbi']}:" />
+                         <x:inputNumber id="valorItbi" value="#{itbiMB.entity.valorItbi}" styleClass="form-control"/>
+                     </div>
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="valorM2" value="* #{msg['itbi.valorM2']}:" />
+                         <x:inputNumber id="valorM2" value="#{itbiMB.entity.valorM2}" styleClass="form-control"/>
+                     </div>
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="tipoImovel" value="#{msg['itbi.tipoImovel']}:" />
+                         <h:selectOneMenu id="tipoImovel" value="#{itbiMB.entity.tipoImovel}"  styleClass="form-control" >
+                             <f:selectItem itemLabel="#{xmsg['select']}" />
+                             <f:selectItems value="#{findAllBean.get(classMB.tipoImovel)}" 
+                                            var="tipoImovel"
+                                            itemLabel="#{tipoImovel}"/>
+                         </h:selectOneMenu>
+                     </div>
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="observacao" value="#{msg['itbi.observacao']}:" />
+                         <p:inputText id="observacao" value="#{itbiMB.entity.observacao}" maxlength="255"  styleClass="form-control"  />
+                     </div>
+
+                 </div>
+             </div>
+        </p:fieldset>
+        <h:outputText value="#{xmsg['requiredFieldsForm']}"/>
+        <div class="uix-center">
+            <x:securityArea rolesAllowed="itbi.create">
+                <p:commandButton process="@form" update="@form" action="#{itbiMB.save}" value="#{xmsg['save']}" />
+            </x:securityArea>
+            <x:securityArea rolesAllowed="itbi.audit">
+                <x:audit for="#{itbiMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+
+</ui:composition>

@@ -1,0 +1,166 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces">
+    <ui:param name="title" value="#{msg['itbi.list']}" />
+    <ui:define name="body">
+        <ui:include src="menuItbi.xhtml" />
+        <h:form id="formListItbi">
+            <x:modalMessages/>
+
+            <x:dataTableActions fileName="itbi_export" target=":formListItbi:dataTableItbi"
+                                     widgetVar="dataTableItbiWidget"  />
+
+            <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
+                         var="itbi" rowIndexVar="index" id="dataTableItbi" widgetVar="dataTableItbiWidget" styleClass="table-responsive"
+                         currentPageReportTemplate="#{itbiMB.dataModel.currentPageReportTemplate}"
+                         paginatorTemplate="#{itbiMB.dataModel.paginatorTemplate}"
+                         value="#{itbiMB.dataModel}" lazy="true" >
+                <p:column styleClass="uix-datatable-index">
+                    <f:facet name="header">-</f:facet>
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+                <p:column headerText="#{msg['itbi.data']}" sortBy="#{itbi.data}"
+                    filterBy="#{itbi.data}"   style="text-align: center;">
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['itbi.data']}" />
+                        <x:dateFilter/>
+                    </f:facet>
+                    <h:outputText value="#{itbi.data}">
+                        <f:convertDateTime />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['itbi.inscricaoCadastral']}" sortBy="#{itbi.inscricaoCadastral}"
+                    filterBy="#{itbi.inscricaoCadastral}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['itbi.inscricaoCadastral']}" />
+                    </f:facet>
+                    <h:outputText value="#{itbi.inscricaoCadastral}"/>
+                </p:column>
+                <p:column headerText="#{msg['itbi.endereco']}" sortBy="#{itbi.endereco}"
+                    filterBy="#{itbi.endereco}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['itbi.endereco']}" />
+                    </f:facet>
+                    <h:outputText value="#{itbi.endereco}"/>
+                </p:column>
+                <p:column headerText="#{msg['itbi.bairro']}" sortBy="#{itbi.bairro}"
+                    filterBy="#{itbi.bairro}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['itbi.bairro']}" />
+                    </f:facet>
+                    <h:outputText value="#{itbi.bairro}"/>
+                </p:column>
+                <p:column headerText="#{msg['itbi.natureza']}" sortBy="#{itbi.natureza}"
+                    filterBy="#{itbi.natureza}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['itbi.natureza']}" />
+                    </f:facet>
+                    <h:outputText value="#{itbi.natureza}"/>
+                </p:column>
+                <p:column headerText="#{msg['itbi.areaTerreno']}" sortBy="#{itbi.areaTerreno}"
+                       style="text-align: right;">
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['itbi.areaTerreno']}" />
+                    </f:facet>
+                    <h:outputText value="#{itbi.areaTerreno}">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['itbi.areaEdificada']}" sortBy="#{itbi.areaEdificada}"
+                       style="text-align: right;">
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['itbi.areaEdificada']}" />
+                    </f:facet>
+                    <h:outputText value="#{itbi.areaEdificada}">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['itbi.valorDeclarado']}" sortBy="#{itbi.valorDeclarado}"
+                       style="text-align: right;">
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['itbi.valorDeclarado']}" />
+                    </f:facet>
+                    <h:outputText value="#{itbi.valorDeclarado}">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['itbi.valorTransferencia']}" sortBy="#{itbi.valorTransferencia}"
+                       style="text-align: right;">
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['itbi.valorTransferencia']}" />
+                    </f:facet>
+                    <h:outputText value="#{itbi.valorTransferencia}">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['itbi.valorItbi']}" sortBy="#{itbi.valorItbi}"
+                       style="text-align: right;">
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['itbi.valorItbi']}" />
+                    </f:facet>
+                    <h:outputText value="#{itbi.valorItbi}">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['itbi.valorM2']}" sortBy="#{itbi.valorM2}"
+                       style="text-align: right;">
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['itbi.valorM2']}" />
+                    </f:facet>
+                    <h:outputText value="#{itbi.valorM2}">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['itbi.tipoImovel']}" sortBy="#{itbi.tipoImovel}"
+                    filterBy="#{itbi.tipoImovel}"  filterOptions="#{findAllBean.getSelect(classMB.tipoImovel)}" >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['itbi.tipoImovel']}" />
+                    </f:facet>
+                    <h:outputText value="#{itbi.tipoImovel}"/>
+                </p:column>
+                <p:column headerText="#{msg['itbi.observacao']}" sortBy="#{itbi.observacao}"
+                    filterBy="#{itbi.observacao}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['itbi.observacao']}" />
+                    </f:facet>
+                    <h:outputText value="#{itbi.observacao}"/>
+                </p:column>
+                <p:column styleClass="uix-datatable-actions" exportable="false" headerText="#{xmsg['actions']}">
+                    <f:facet name="header">
+                        <h:outputText value="#{xmsg['actions']}"/>
+                    </f:facet>
+                    <p:commandButton oncomplete="PF('widgetItbiDetail').show();"  icon="#{icons.detail}" 
+                                     process="@form" update=":formDetailItbi" title="#{xmsg['detail']}" >
+                        <f:setPropertyActionListener value="#{itbi}" target="#{itbiMB.entity}" />
+                    </p:commandButton>
+                    <x:securityArea rolesAllowed="itbi.create">
+                        <p:button icon="#{icons.edit}" outcome="createItbi" title="#{xmsg['edit']}">
+                            <f:param name="id" value="#{itbi.id}" />
+                        </p:button>
+                    </x:securityArea>
+                    <x:securityArea rolesAllowed="itbi.delete">
+                        <p:commandButton icon="#{icons.delete}" title="#{xmsg['delete']}" process="@form" update="@form" 
+                                         action="#{itbiMB.delete}" >
+                            <f:setPropertyActionListener value="#{itbi.id}" target="#{itbiMB.id}" />
+                            <x:confirmation message="#{xmsg['confirmDelete']} - #{itbi}" />
+                        </p:commandButton>
+                    </x:securityArea>
+                </p:column>
+            </p:dataTable>
+            <div class="uix-audit-delete">
+                <x:securityArea rolesAllowed="itbi.audit">
+                    <x:auditDelete for="#{itbiMB.entityClass}"/>
+                </x:securityArea>
+            </div>  
+        </h:form>
+
+        <p:dialog widgetVar="widgetItbiDetail" header="#{msg['itbi.detail']}" appendTo="@(body)" 
+                  modal="true" styleClass="uix-dialog-fluid" >
+                  <ui:include src="detailItbi.xhtml" />
+        </p:dialog>
+    </ui:define>
+</ui:composition>

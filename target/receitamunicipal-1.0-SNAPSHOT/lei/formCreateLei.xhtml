@@ -1,0 +1,85 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces">
+    
+  
+    <h:form id="formCreateLei" >
+        <p:fieldset legend="#{xmsg['generalData']}">
+            <x:modalMessages/>
+
+            <div class="container-fluid">
+                 <div class="row">
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="descricao" value="* #{msg['lei.descricao']}:" />
+                         <p:inputText id="descricao" value="#{leiMB.entity.descricao}" maxlength="200"  styleClass="form-control"  />
+                     </div>
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="numeroLei" value="* #{msg['lei.numeroLei']}:" />
+                         <p:inputMask id="numeroLei" mask="9?999999999" slotChar="" value="#{leiMB.entity.numeroLei}" styleClass="form-control" />
+                     </div>
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="ano" value="* #{msg['lei.ano']}:" />
+                         <p:inputMask id="ano" mask="9?999999999" slotChar="" value="#{leiMB.entity.ano}" styleClass="form-control" />
+                     </div>
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="tipoLei" value="#{msg['lei.tipoLei']}:" />
+                         <h:selectOneMenu id="tipoLei" value="#{leiMB.entity.tipoLei}"  styleClass="form-control" >
+                             <f:selectItem itemLabel="#{xmsg['select']}" />
+                             <f:selectItems value="#{findAllBean.get(classMB.tipoLei)}" 
+                                            var="tipoLei"
+                                            itemLabel="#{tipoLei}"/>
+                         </h:selectOneMenu>
+                     </div>
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="tipoEsfera" value="#{msg['lei.tipoEsfera']}:" />
+                         <h:selectOneMenu id="tipoEsfera" value="#{leiMB.entity.tipoEsfera}"  styleClass="form-control" >
+                             <f:selectItem itemLabel="#{xmsg['select']}" />
+                             <f:selectItems value="#{findAllBean.get(classMB.tipoEsfera)}" 
+                                            var="tipoEsfera"
+                                            itemLabel="#{tipoEsfera}"/>
+                         </h:selectOneMenu>
+                     </div>
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="publicao" value="* #{msg['lei.publicao']}:" />
+                         <p:calendar id="publicao" value="#{leiMB.entity.publicao}" 
+                                     showOn="button" pattern="dd/MM/yyyy" styleClass="uix-calendar"  >
+                             <x:mask/>
+                         </p:calendar>
+                     </div>
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                     <h:inputFile label="arquivo" value="#{LeiMB.entity.arquivo}" 
+					 />
+                     
+                      </div>
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="observacao" value="#{msg['lei.observacao']}:" />
+                         <p:inputText id="observacao" value="#{leiMB.entity.observacao}" maxlength="255"  styleClass="form-control"  />
+                     </div>
+                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                         <h:outputLabel for="orgao" value="#{msg['lei.orgao']}:" />
+                         <h:selectOneMenu id="orgao" value="#{leiMB.entity.orgao}" converter="entityConverter" styleClass="form-control" >
+                             <f:selectItem itemLabel="#{xmsg['select']}" />
+                             <f:selectItems value="#{findAllBean.get(classMB.orgao)}" 
+                                            var="orgao"
+                                            itemLabel="#{orgao}"/>
+                         </h:selectOneMenu>
+                     </div>
+
+                 </div>
+             </div>
+        </p:fieldset>
+        <h:outputText value="#{xmsg['requiredFieldsForm']}"/>
+        <div class="uix-center">
+            <x:securityArea rolesAllowed="lei.create">
+                <p:commandButton process="@form" update="@form" action="#{leiMB.save}" value="#{xmsg['save']}" />
+            </x:securityArea>
+            <x:securityArea rolesAllowed="lei.audit">
+                <x:audit for="#{leiMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+
+</ui:composition>

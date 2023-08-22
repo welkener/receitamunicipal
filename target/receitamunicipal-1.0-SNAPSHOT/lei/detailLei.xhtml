@@ -1,0 +1,58 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces">
+    <h:form id="formDetailLei" styleClass="uix-form-detail">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['lei.descricao']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{leiMB.entity.descricao}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['lei.numeroLei']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{leiMB.entity.numeroLei}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['lei.ano']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{leiMB.entity.ano}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['lei.tipoLei']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{leiMB.entity.tipoLei}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['lei.tipoEsfera']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{leiMB.entity.tipoEsfera}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['lei.publicao']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{leiMB.entity.publicao}" styleClass="uix-content-detail">
+                        <f:convertDateTime />
+                    </h:outputText>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['lei.arquivo']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{leiMB.entity.arquivo}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['lei.observacao']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{leiMB.entity.observacao}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['lei.orgao']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{leiMB.entity.orgao}" styleClass="uix-content-detail"/>
+                </div>
+           </div>
+         </div>
+        <p:separator/>
+        <div class="uix-center">
+            <p:commandButton type="button" value="#{xmsg['close']}" onclick="PF('widgetLeiDetail').hide()" />
+            <x:securityArea rolesAllowed="lei.audit">
+                <x:audit for="#{leiMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+</ui:composition>

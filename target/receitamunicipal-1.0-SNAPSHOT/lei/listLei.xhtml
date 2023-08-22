@@ -1,0 +1,126 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces">
+    <ui:param name="title" value="#{msg['lei.list']}" />
+    <ui:define name="body">
+        <ui:include src="menuLei.xhtml" />
+        <h:form id="formListLei">
+            <x:modalMessages/>
+
+            <x:dataTableActions fileName="lei_export" target=":formListLei:dataTableLei"
+                                     widgetVar="dataTableLeiWidget"  />
+
+            <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
+                         var="lei" rowIndexVar="index" id="dataTableLei" widgetVar="dataTableLeiWidget" styleClass="table-responsive"
+                         currentPageReportTemplate="#{leiMB.dataModel.currentPageReportTemplate}"
+                         paginatorTemplate="#{leiMB.dataModel.paginatorTemplate}"
+                         value="#{leiMB.dataModel}" lazy="true" >
+                <p:column styleClass="uix-datatable-index">
+                    <f:facet name="header">-</f:facet>
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+                <p:column headerText="#{msg['lei.descricao']}" sortBy="#{lei.descricao}"
+                    filterBy="#{lei.descricao}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['lei.descricao']}" />
+                    </f:facet>
+                    <h:outputText value="#{lei.descricao}"/>
+                </p:column>
+                <p:column headerText="#{msg['lei.numeroLei']}" sortBy="#{lei.numeroLei}"
+                    filterBy="#{lei.numeroLei}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['lei.numeroLei']}" />
+                    </f:facet>
+                    <h:outputText value="#{lei.numeroLei}"/>
+                </p:column>
+                <p:column headerText="#{msg['lei.ano']}" sortBy="#{lei.ano}"
+                    filterBy="#{lei.ano}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['lei.ano']}" />
+                    </f:facet>
+                    <h:outputText value="#{lei.ano}"/>
+                </p:column>
+                <p:column headerText="#{msg['lei.tipoLei']}" sortBy="#{lei.tipoLei}"
+                    filterBy="#{lei.tipoLei}"  filterOptions="#{findAllBean.getSelect(classMB.tipoLei)}" >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['lei.tipoLei']}" />
+                    </f:facet>
+                    <h:outputText value="#{lei.tipoLei}"/>
+                </p:column>
+                <p:column headerText="#{msg['lei.tipoEsfera']}" sortBy="#{lei.tipoEsfera}"
+                    filterBy="#{lei.tipoEsfera}"  filterOptions="#{findAllBean.getSelect(classMB.tipoEsfera)}" >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['lei.tipoEsfera']}" />
+                    </f:facet>
+                    <h:outputText value="#{lei.tipoEsfera}"/>
+                </p:column>
+                <p:column headerText="#{msg['lei.publicao']}" sortBy="#{lei.publicao}"
+                    filterBy="#{lei.publicao}"   style="text-align: center;">
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['lei.publicao']}" />
+                        <x:dateFilter/>
+                    </f:facet>
+                    <h:outputText value="#{lei.publicao}">
+                        <f:convertDateTime />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['lei.arquivo']}" sortBy="#{lei.arquivo}"
+                       >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['lei.arquivo']}" />
+                    </f:facet>
+                    <h:outputText value="#{lei.arquivo}"/>
+                </p:column>
+                <p:column headerText="#{msg['lei.observacao']}" sortBy="#{lei.observacao}"
+                    filterBy="#{lei.observacao}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['lei.observacao']}" />
+                    </f:facet>
+                    <h:outputText value="#{lei.observacao}"/>
+                </p:column>
+                <p:column headerText="#{msg['lei.orgao']}" sortBy="#{lei.orgao}"
+                       >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['lei.orgao']}" />
+                    </f:facet>
+                    <h:outputText value="#{lei.orgao}"/>
+                </p:column>
+                <p:column styleClass="uix-datatable-actions" exportable="false" headerText="#{xmsg['actions']}">
+                    <f:facet name="header">
+                        <h:outputText value="#{xmsg['actions']}"/>
+                    </f:facet>
+                    <p:commandButton oncomplete="PF('widgetLeiDetail').show();"  icon="#{icons.detail}" 
+                                     process="@form" update=":formDetailLei" title="#{xmsg['detail']}" >
+                        <f:setPropertyActionListener value="#{lei}" target="#{leiMB.entity}" />
+                    </p:commandButton>
+                    <x:securityArea rolesAllowed="lei.create">
+                        <p:button icon="#{icons.edit}" outcome="createLei" title="#{xmsg['edit']}">
+                            <f:param name="id" value="#{lei.id}" />
+                        </p:button>
+                    </x:securityArea>
+                    <x:securityArea rolesAllowed="lei.delete">
+                        <p:commandButton icon="#{icons.delete}" title="#{xmsg['delete']}" process="@form" update="@form" 
+                                         action="#{leiMB.delete}" >
+                            <f:setPropertyActionListener value="#{lei.id}" target="#{leiMB.id}" />
+                            <x:confirmation message="#{xmsg['confirmDelete']} - #{lei}" />
+                        </p:commandButton>
+                    </x:securityArea>
+                </p:column>
+            </p:dataTable>
+            <div class="uix-audit-delete">
+                <x:securityArea rolesAllowed="lei.audit">
+                    <x:auditDelete for="#{leiMB.entityClass}"/>
+                </x:securityArea>
+            </div>  
+        </h:form>
+
+        <p:dialog widgetVar="widgetLeiDetail" header="#{msg['lei.detail']}" appendTo="@(body)" 
+                  modal="true" styleClass="uix-dialog-fluid" >
+                  <ui:include src="detailLei.xhtml" />
+        </p:dialog>
+    </ui:define>
+</ui:composition>

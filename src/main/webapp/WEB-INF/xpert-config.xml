@@ -1,0 +1,14 @@
+<xpert-config>
+
+    <auditing>
+        <auditing-impl>br.gov.ma.imperatriz.receitamunicipal.modelo.audit.Auditing</auditing-impl>
+        <metadata-impl>br.gov.ma.imperatriz.receitamunicipal.modelo.audit.Metadata</metadata-impl>
+        <query-auditing-impl>br.gov.ma.imperatriz.receitamunicipal.modelo.audit.QueryAuditing</query-auditing-impl>
+        <auditing-listener>br.gov.ma.imperatriz.receitamunicipal.application.AuditingListenerImpl</auditing-listener>
+        <query-audit-persister-factory>br.gov.ma.imperatriz.receitamunicipal.application.QueryAuditPersisterFactoryImpl</query-audit-persister-factory>
+    </auditing>
+    
+    <entity-manager-factory>br.gov.ma.imperatriz.receitamunicipal.application.EntityManagerFactoryImpl</entity-manager-factory>
+    <resource-bundle>bundles.messages</resource-bundle>
+
+</xpert-config>

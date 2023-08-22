@@ -1,0 +1,86 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces">
+    <h:form id="formDetailItbi" styleClass="uix-form-detail">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['itbi.data']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{itbiMB.entity.data}" styleClass="uix-content-detail">
+                        <f:convertDateTime />
+                    </h:outputText>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['itbi.inscricaoCadastral']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{itbiMB.entity.inscricaoCadastral}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['itbi.endereco']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{itbiMB.entity.endereco}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['itbi.bairro']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{itbiMB.entity.bairro}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['itbi.natureza']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{itbiMB.entity.natureza}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['itbi.areaTerreno']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{itbiMB.entity.areaTerreno}" styleClass="uix-content-detail">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+                    </h:outputText>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['itbi.areaEdificada']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{itbiMB.entity.areaEdificada}" styleClass="uix-content-detail">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+                    </h:outputText>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['itbi.valorDeclarado']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{itbiMB.entity.valorDeclarado}" styleClass="uix-content-detail">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+                    </h:outputText>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['itbi.valorTransferencia']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{itbiMB.entity.valorTransferencia}" styleClass="uix-content-detail">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+                    </h:outputText>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['itbi.valorItbi']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{itbiMB.entity.valorItbi}" styleClass="uix-content-detail">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+                    </h:outputText>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['itbi.valorM2']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{itbiMB.entity.valorM2}" styleClass="uix-content-detail">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+                    </h:outputText>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['itbi.tipoImovel']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{itbiMB.entity.tipoImovel}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['itbi.observacao']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{itbiMB.entity.observacao}" styleClass="uix-content-detail"/>
+                </div>
+           </div>
+         </div>
+        <p:separator/>
+        <div class="uix-center">
+            <p:commandButton type="button" value="#{xmsg['close']}" onclick="PF('widgetItbiDetail').hide()" />
+            <x:securityArea rolesAllowed="itbi.audit">
+                <x:audit for="#{itbiMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+</ui:composition>
